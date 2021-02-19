@@ -14,6 +14,7 @@ func Migrations() {
 		warehousesMigrations(&db)
 		categoryMigrations(&db)
 		supplierMigrations(&db)
+		productMigrations(&db)
 		userMigrations(&db)
 		rackMigrations(&db)
 	}
