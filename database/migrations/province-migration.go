@@ -1,7 +1,19 @@
 package migrations
 
-import "gorm.io/gorm"
+import (
+	"fmt"
+	"warehouse/entity"
 
-func provinceMigrations(db *gorm.DB)  {
+	"gorm.io/gorm"
+)
+
+func provinceMigrations(db *gorm.DB) {
+	var checkTableProvinces bool
+
+	checkTableProvinces = db.Migrator().HasTable(&entity.Provinces{})
+	if !checkTableProvinces {
+		db.Migrator().CreateTable(&entity.Provinces{})
+		fmt.Println("Create Table Provinces")
+	}
 
 }
