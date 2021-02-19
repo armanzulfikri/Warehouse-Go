@@ -12,10 +12,10 @@ import (
 // SeedUser func
 func SeedUser(db *gorm.DB) {
 	var userArray = [...][7]string{
-		{"admin", "M", "20/12/1997", "yogyakarta", "admin", "admin@xapiens.id", "admin"},
-		{"supervisor", "M", "20/12/1995", "yogyakarta", "supervisor_entry", "supervisor@xapiens.id", "supervisor"},
-		{"entry", "M", "20/12/1996", "yogyakarta", "entry", "entry@xapiens.id", "entry"},
-		{"manajemen", "M", "20/12/1995", "yogyakarta", "manajemen", "manajemen@xapiens.id", "manajemen"},
+		{"Arman Zulfikri", "M", "1997-12-20", "yogyakarta", "admin", "arman@xapiens.id", "arman"},
+		{"Agus Saputra", "M", "1995-12-20", "yogyakarta", "supervisor_entry", "agus@xapiens.id", "agus"},
+		{"Bagus Purnomo", "M", "1996-12-20", "yogyakarta", "entry", "bagus@xapiens.id", "bagus"},
+		{"Gery Raharjo", "M", "1995-12-20", "yogyakarta", "manajemen", "gery@xapiens.id", "gery"},
 	}
 
 	var user entity.Users
