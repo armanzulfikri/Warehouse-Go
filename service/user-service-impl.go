@@ -55,7 +55,7 @@ func (service userServiceImpl) Create(request request.RegisterRequest) (response
 
 //Update
 func (service userServiceImpl) Update(id interface{}, request request.RegisterRequest) (response response.UserResponse) {
-	user := *service.Repository.GetById(id)
+	user := service.Repository.GetById(id)
 
 	hash, _ := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
 	user.FullName = request.FullName
@@ -86,7 +86,7 @@ func (service userServiceImpl) Update(id interface{}, request request.RegisterRe
 func (service userServiceImpl) GetById(id interface{}) (response response.UserResponse) {
 	result := service.Repository.GetById(id)
 
-	if result.Email == "" {
+	if result.Email != "" {
 		response.ID = result.ID
 		response.Email = result.Email
 		response.FullName = result.FullName

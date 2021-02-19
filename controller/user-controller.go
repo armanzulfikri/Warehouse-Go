@@ -76,7 +76,6 @@ func (controller *UserController) GetOne(context *gin.Context) {
 func (controller *UserController) Update(context *gin.Context) {
 	var request request.RegisterRequest
 
-
 	context.Bind(&request)
 
 	resp := controller.UserService.Update(context.Param("id"), request)

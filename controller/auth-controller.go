@@ -19,9 +19,9 @@ func NewAuthController(authService *service.AuthService) AuthController {
 }
 
 //Route ...
-func (controller *AuthController) Route(group *gin.RouterGroup) {
-	group.POST("/auth/register", controller.Register)
-	group.GET("/auth/login", controller.Login)
+func (controller *AuthController) Route(router *gin.Engine) {
+	router.POST("/auth/register", controller.Register)
+	router.POST("/auth/login", controller.Login)
 }
 
 //Register ...
@@ -60,7 +60,7 @@ func (controller *AuthController) Login(context *gin.Context) {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   401,
-				Status: "Login Failed",
+				Status: resp.Status,
 				Data:   nil,
 			})
 	} else {

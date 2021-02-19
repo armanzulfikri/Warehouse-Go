@@ -26,7 +26,7 @@ type authServiceImpl struct {
 func (service authServiceImpl) Login(request request.LoginRequest) (response response.LoginResponse) {
 	user := service.Repository.GetByEmail(request.Email)
 
-	if err := bcrypt.CompareHashAndPassword([]byte(request.Password), []byte(user.Password)); err != nil {
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(request.Password)); err != nil {
 		log.Println("Email ", user.Email, " Password salah")
 		response.Code = 401
 		response.Status = "email atau password salah"
@@ -42,7 +42,7 @@ func (service authServiceImpl) Login(request request.LoginRequest) (response res
 			user.Email,
 			user.Role,
 			jwt.StandardClaims{
-				ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
+				ExpiresAt: time.Now().Add(time.Hour * 10).Unix(),
 				IssuedAt:  time.Now().Unix(),
 			},
 		}
