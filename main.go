@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"warehouse/config"
+	"warehouse/database/migrations"
+	"warehouse/database/seeder"
+	"warehouse/web"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"warehouse/config"
-	"warehouse/web"
 )
 
 func init() {
@@ -15,9 +18,11 @@ func init() {
 	}
 }
 
-func main()  {
+func main() {
 	config.Connect()
 	//panggil seeder dan migrate disini
+	migrations.Migrations()
+	seeder.Seeder()
 	router := web.Route(gin.Default())
 	router.Run(":8080")
 }
