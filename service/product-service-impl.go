@@ -7,16 +7,18 @@ import (
 	"warehouse/repository"
 )
 
+//NewProductService ...
 func NewProductService(productRepository *repository.ProductRepository) ProductService {
 	return &productServiceImpl{
-		ProductRepository: *productRepository,
+		Repository: *productRepository,
 	}
 }
 
 type productServiceImpl struct {
-	ProductRepository repository.ProductRepository
+	Repository repository.ProductRepository
 }
 
+//Create ...
 func (service productServiceImpl) Create(request request.CreateProduct) (resp response.CreateProduct) {
 	//Tambah Validasi disini
 
@@ -25,7 +27,7 @@ func (service productServiceImpl) Create(request request.CreateProduct) (resp re
 		Name:     request.Name,
 	}
 
-	service.ProductRepository.Insert(product)
+	service.Repository.Insert(product)
 
 	resp = response.CreateProduct{
 		ID: product.Id,
@@ -35,6 +37,7 @@ func (service productServiceImpl) Create(request request.CreateProduct) (resp re
 	return resp
 }
 
+//List ...
 func (service productServiceImpl) List() (responses []response.GetProduct) {
 	return responses
 }

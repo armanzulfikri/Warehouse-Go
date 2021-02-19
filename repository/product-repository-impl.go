@@ -28,11 +28,13 @@ func (repository productRepositoryImpl) GetAll() (products []entity.Products) {
 
 //GetById ...
 func (repository productRepositoryImpl) GetById(id int) (product entity.Products) {
-	panic("implement me")
+	repository.Database.First(&product, id)
+
+	return product
 }
 
 //Update
-func (repository productRepositoryImpl) Update(product entity.Products) {
+func (repository productRepositoryImpl) Update(request entity.Products) (product entity.Products) {
 	panic("implement me")
 }
 
