@@ -17,11 +17,11 @@ type userRepositoryImpl struct {
 	Database *gorm.DB
 }
 
-func (repository userRepositoryImpl) GetByEmail(email string) (user *entity.Users) {
-	result := repository.Database.Where("email = ?", email)
+func (repository userRepositoryImpl) GetByEmail(email string) (user entity.Users) {
+	result := repository.Database.Where("email = ?", email).First(&user)
 
 	if result.RowsAffected > 0 {
-		result.First(&user)
+		return
 	} else {
 		fmt.Println("Error", result.Error)
 	}
@@ -30,38 +30,39 @@ func (repository userRepositoryImpl) GetByEmail(email string) (user *entity.User
 }
 
 func (repository userRepositoryImpl) Insert(request *entity.Users) (response entity.Users) {
-	 err := repository.Database.Create(&request).Scan(&response)
+	err := repository.Database.Create(&request).Scan(&response)
 
-	 if err.RowsAffected > 0 {
-	 	return response
-	 } else {
-	 	fmt.Println("error ", err.Error)
-	 }
+	if err.RowsAffected > 0 {
+		return response
+	} else {
+		fmt.Println("error ", err.Error)
+	}
 
-	 return entity.Users{}
+	return entity.Users{}
 }
 
 func (repository userRepositoryImpl) GetAll() (users []entity.Users) {
 	panic("implement me")
 }
 
-func (repository userRepositoryImpl) GetById(id interface{}) (user *entity.Users) {
-	result := repository.Database.First(&user, id)
+func (repository userRepositoryImpl) GetById(id interface{}) (response entity.Users) {
+	result := repository.Database.First(&response, id)
+
 	if result.RowsAffected > 0 {
-		result.Scan(&user)
+		return
 	} else {
-		fmt.Println("Failed to update date", result.Error)
+		fmt.Println("Error ", result.Error)
 	}
 
 	return
 }
 
 func (repository userRepositoryImpl) Update(request *entity.Users) (response entity.Users) {
-	result := repository.Database.Save(&request)
+	result := repository.Database.Save(&request).Scan(&response)
 	if result.RowsAffected > 0 {
-		result.Scan(&response)
+		return
 	} else {
-		fmt.Println("Failed to update date", result.Error)
+		fmt.Println("Failed to update date, error", result.Error)
 	}
 
 	return

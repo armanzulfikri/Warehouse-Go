@@ -31,12 +31,15 @@ func Route(router *gin.Engine) *gin.Engine  {
 	authController := controller.NewAuthController(&authService)
 	userController := controller.NewUserController(&userService)
 
+	// For Auth And Register
+	authController.Route(router)
+
 	group := *router.Group("/")
 
 	group.Use(Middleware)
 	{
 		productController.Route(&group)
-		authController.Route(&group)
+
 		userController.Route(&group)
 	}
 
