@@ -11,6 +11,8 @@ import (
 func districtMigrations(db *gorm.DB) {
 	var checkTableDistricts bool
 
+	db.Migrator().DropTable(&entity.Districts{})
+
 	checkTableDistricts = db.Migrator().HasTable(&entity.Districts{})
 	if !checkTableDistricts {
 		db.Migrator().CreateTable(&entity.Districts{})
