@@ -22,15 +22,15 @@ type productServiceImpl struct {
 func (service productServiceImpl) Create(request request.CreateProduct) (resp response.CreateProduct) {
 	//Tambah Validasi disini
 
-	product := entity.Products{
-		Id:       request.ID,
-		Name:     request.Name,
+	product := entity.Product{
+		Id:   request.ID,
+		Name: request.Name,
 	}
 
 	service.Repository.Insert(product)
 
 	resp = response.CreateProduct{
-		ID: product.Id,
+		ID:   product.Id,
 		Name: product.Name,
 	}
 
@@ -41,4 +41,3 @@ func (service productServiceImpl) Create(request request.CreateProduct) (resp re
 func (service productServiceImpl) List() (responses []response.GetProduct) {
 	return responses
 }
-

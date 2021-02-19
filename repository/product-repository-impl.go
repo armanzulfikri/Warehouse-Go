@@ -1,8 +1,9 @@
 package repository
 
 import (
-	"gorm.io/gorm"
 	"warehouse/entity"
+
+	"gorm.io/gorm"
 )
 
 //NewProductRepository
@@ -17,24 +18,24 @@ type productRepositoryImpl struct {
 }
 
 //Insert ...
-func (repository productRepositoryImpl) Insert(request entity.Products) (product entity.Products) {
+func (repository productRepositoryImpl) Insert(request entity.Product) (product entity.Product) {
 	panic("implement me")
 }
 
 //GetAll ...
-func (repository productRepositoryImpl) GetAll() (products []entity.Products) {
+func (repository productRepositoryImpl) GetAll() (products []entity.Product) {
 	panic("implement me")
 }
 
 //GetById ...
-func (repository productRepositoryImpl) GetById(id int) (product entity.Products) {
+func (repository productRepositoryImpl) GetById(id int) (product entity.Product) {
 	repository.Database.First(&product, id)
 
 	return product
 }
 
 //Update
-func (repository productRepositoryImpl) Update(request entity.Products) (product entity.Products) {
+func (repository productRepositoryImpl) Update(request entity.Product) (product entity.Product) {
 	panic("implement me")
 }
 
