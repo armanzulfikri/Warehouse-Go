@@ -11,9 +11,10 @@ func Seeder() {
 	if os.Getenv("USE_SEEDER") == "yes" {
 		SeedProvince(&db)
 		SeedDisctrict(&db)
-		SeedUser(&db)
-		SeedCategory(&db)
 		SeedWareHouse(&db)
 		SeedRack(&db)
+		SeedCategory(&db)
+		SeedUser(&db)
+		SeedSupplier(&db)
 	}
 }
