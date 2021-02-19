@@ -1,10 +1,17 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 //Racks Entity
 type Racks struct {
-	gorm.Model
+	ID           uint `gorm:"primarykey"`
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
+	DeletedAt    gorm.DeletedAt `gorm:"index"`
 	WarehousesID uint
 	CategoryID   uint
 	RackCode     string `json:"rack_code"`
