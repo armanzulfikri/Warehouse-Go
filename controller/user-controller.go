@@ -24,7 +24,7 @@ func (controller *UserController) Route(group *gin.RouterGroup) {
 	group.GET("/api/user/:id", controller.GetOne)
 	group.POST("/api/user", controller.Create)
 	group.PUT("/api/user/:id", controller.Update)
-	group.DELETE("/api/user", controller.List)
+	group.DELETE("/api/user/:id", controller.Delete)
 }
 
 //Create ...
@@ -84,7 +84,7 @@ func (controller *UserController) Update(context *gin.Context) {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   401,
-				Status: "Login Failed",
+				Status: "Update User Failed",
 				Data:   nil,
 			})
 	} else {
@@ -99,7 +99,23 @@ func (controller *UserController) Update(context *gin.Context) {
 
 //List ...
 func (controller *UserController) List(context *gin.Context) {
-	panic("implement me")
+	resp := controller.UserService.List()
+
+	if len(resp) > 0 {
+		context.JSON(http.StatusOK,
+			model.WebResponse{
+				Code:   http.StatusOK,
+				Status: "OK",
+				Data:   resp,
+			})
+	} else {
+		context.JSON(http.StatusOK,
+			model.WebResponse{
+				Code:   http.StatusOK,
+				Status: "OK",
+				Data:   nil,
+			})
+	}
 }
 
 //Delete ...

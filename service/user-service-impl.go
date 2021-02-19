@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"warehouse/entity"
 	"warehouse/model/request"
@@ -21,7 +22,15 @@ type userServiceImpl struct {
 
 //List
 func (service userServiceImpl) List() (responses []response.UserResponse) {
-	panic("implement me")
+	responses = service.Repository.GetAll()
+
+	if len(responses) > 0 {
+		fmt.Println(len(responses))
+	} else {
+		fmt.Println("FAILED")
+	}
+
+	return responses
 }
 
 //Create
@@ -68,7 +77,7 @@ func (service userServiceImpl) Update(id interface{}, request request.RegisterRe
 
 	service.Repository.Update(&user)
 
-	if user.Email == "" {
+	if user.Email != "" {
 		response.ID = user.ID
 		response.Email = user.Email
 		response.FullName = user.FullName
