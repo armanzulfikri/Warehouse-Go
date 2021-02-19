@@ -2,6 +2,7 @@ package seeder
 
 import (
 	"fmt"
+	"strconv"
 	"warehouse/entity"
 
 	"gorm.io/gorm"
@@ -9,7 +10,7 @@ import (
 
 // SeedRack func
 func SeedRack(db *gorm.DB) {
-	var categoryArray = [...][4]string{
+	var SeedRackArray = [...][4]string{
 		{"1", "1", "KLTNF-01", "100"},
 		{"2", "3", "JMBRM-01", "300"},
 		{"3", "5", "GRSKI-01", "100"},
@@ -23,13 +24,20 @@ func SeedRack(db *gorm.DB) {
 		{"11", "2", "MLNGF-01", "80"},
 	}
 
-	var category entity.Categories
-	for _, v := range categoryArray {
-		category.CategoryName = v[0]
+	var racks entity.Racks
+	for _, v := range SeedRackArray {
+		warehouse, _ := strconv.ParseUint(v[0], 10, 32)
+		category, _ := strconv.Atoi(v[1])
+		capacity, _ := strconv.Atoi(v[3])
 
-		category.ID = 0
+		racks.WarehousesID = uint(warehouse)
+		racks.CategoryID = uint(category)
+		racks.RackCode = v[2]
+		racks.RackCapacity = int(capacity)
 
-		db.Create(&category)
+		racks.ID = 0
+
+		db.Create(&racks)
 
 	}
 	fmt.Println("Seeder Rack created Sucessfully")

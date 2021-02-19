@@ -14,5 +14,6 @@ func Seeder() {
 		SeedUser(&db)
 		SeedCategory(&db)
 		SeedWareHouse(&db)
+		SeedRack(&db)
 	}
 }
