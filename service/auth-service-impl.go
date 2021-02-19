@@ -83,9 +83,9 @@ func (service authServiceImpl) Register(request request.RegisterRequest) (respon
 		response.FullName = result.FullName
 		response.Gender = result.Gender
 		response.BirthDate = result.BirthDate
-		response.BirthPlace = request.BirthPlace
-		response.Email = request.FullName
-		response.Role = request.Role
+		response.BirthPlace = result.BirthPlace
+		response.Email = result.FullName
+		response.Role = result.Role
 	}
 
 	return
