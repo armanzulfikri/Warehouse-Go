@@ -1,10 +1,17 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 //Warehouses entity
 type Warehouses struct {
-	gorm.Model
+	ID                 uint `gorm:"primarykey"`
+	CreatedAt          time.Time
+	UpdatedAt          time.Time
+	DeletedAt          gorm.DeletedAt `gorm:"index"`
 	DistrictsID        uint
 	WarehousesName     string `json:"warehouses_name"`
 	WarehousesCapacity int    `json:"warehouses_capacity"`
