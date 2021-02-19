@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"warehouse/config"
 	"warehouse/web"
 )
 
@@ -15,6 +16,7 @@ func init() {
 }
 
 func main()  {
+	config.Connect()
 	router := web.Route(gin.Default())
 	router.Run(":8080")
 }
