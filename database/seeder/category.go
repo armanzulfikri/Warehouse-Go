@@ -10,14 +10,16 @@ import (
 // SeedCategory func
 func SeedCategory(db *gorm.DB) {
 	var categoryArray = [...][1]string{
-		{"Makanan Dingin"},
+		{"Makanan Beku"},
 		{"Makanan Kering"},
-		{"Minuman Instant"},
-		{"Industrial"}, {"Kayu"}, {"Besi"}, {"Kaca"}, {"Keramik"},
-		{"Spare Part Laptop"}, {"Handphone"},
+		{"Minuman Instan"},
+		{"Makanan Instan"},
+		{"Makanan Ringan"},
+		{"Kayu"}, {"Besi"}, {"Kaca"}, {"Keramik"},
+		{"Ram"}, {"Motherboard"}, {"Processor"}, {"Graphic Card"}, {"Handphone"},
 		{"Jaket"}, {"Kemeja"}, {"Kaos"}, {"Celana"}, {"Kaos Kaki"}, {"Topi"},
-		{"Masker"}, {"Serum"}, {"Eye Leaner"}, {"Bedak"}, {"Lipstik"},
-		{"Kesehatan"}, {"Obat"}, {"Vitamin"}, {"Hand Sanitizer"}, {"Tisu"},
+		{"Masker"}, {"Serum"}, {"Eye Liner"}, {"Bedak"}, {"Lipstik"},
+		{"Obat"}, {"Vitamin"}, {"Hand Sanitizer"}, {"Tisu"},
 	}
 
 	var category entity.Categories
