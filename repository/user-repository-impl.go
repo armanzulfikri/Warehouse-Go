@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gorm.io/gorm"
 	"warehouse/entity"
+	"warehouse/model/response"
 )
 
 //NewUserRepository ...
@@ -41,8 +42,18 @@ func (repository userRepositoryImpl) Insert(request *entity.Users) (response ent
 	return entity.Users{}
 }
 
-func (repository userRepositoryImpl) GetAll() (users []entity.Users) {
-	panic("implement me")
+func (repository userRepositoryImpl) GetAll() (response []response.UserResponse) {
+	result := repository.Database.Model(&entity.Users{}).
+		Select("users.*").
+		Scan(&response)
+
+	if result.RowsAffected > 0 {
+
+	} else {
+		fmt.Println("Errors ", result.Error)
+	}
+
+	return
 }
 
 func (repository userRepositoryImpl) GetById(id interface{}) (response entity.Users) {
