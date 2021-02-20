@@ -21,11 +21,11 @@ func NewSupplierController(supplierService *service.SupplierService) SupplierCon
 
 //Route ...
 func (controller *SupplierController) Route(group *gin.RouterGroup) {
-	group.GET("/api/supplier", controller.List)
-	group.GET("/api/supplier/:id", controller.GetOne)
-	group.POST("/api/supplier", controller.Create)
-	group.PUT("/api/supplier/:id", controller.Update)
-	group.DELETE("/api/supplier/:id", controller.Delete)
+	group.GET("/api/suppliers", controller.List)
+	group.GET("/api/suppliers/:id", controller.GetOne)
+	group.POST("/api/suppliers", controller.Create)
+	group.PUT("/api/suppliers/:id", controller.Update)
+	group.DELETE("/api/suppliers/:id", controller.Delete)
 }
 
 //Create ...
