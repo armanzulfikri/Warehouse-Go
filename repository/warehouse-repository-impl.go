@@ -33,9 +33,9 @@ func (repository warehouseRepositoryImpl) Insert(request *entity.Warehouses) (re
 
 func (repository warehouseRepositoryImpl) GetAll() (response []response.WarehousesGetAllResponse) {
 	result := repository.Database.Model(&entity.Warehouses{}).
-		Select(`warehouses.id, warehouses.districts_id, districts.name as districts_name,
-		warehouses.created_at, warehouses.warehouses_name, warehouses.warehouses_capacity,
-		warehouses.warehouses_type, warehouses.warehouses_location`).
+		Select(`warehouses.id, warehouses.districts_id as district_id, districts.name as district_name,
+		warehouses.created_at, warehouses.updated_at, warehouses.deleted_at, warehouses.warehouses_name as warehouse_name, warehouses.warehouses_capacity as warehouse_capacity,
+		warehouses.warehouses_type as warehouse_type, warehouses.warehouses_location as warehouse_location`).
 		Joins("join districts on warehouses.districts_id = districts.id").
 		Scan(&response)
 
