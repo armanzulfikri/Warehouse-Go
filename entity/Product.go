@@ -20,6 +20,7 @@ type Products struct {
 	SupplierID      uint
 	ProductName     string
 	ProductImageURL string
+	Description     string
 
 	CreatedAt time.Time
 	UpdatedAt time.Time

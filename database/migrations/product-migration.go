@@ -18,5 +18,4 @@ func productMigrations(db *gorm.DB) {
 		db.Migrator().CreateTable(&entity.Products{})
 		fmt.Println("Create Table product")
 	}
-
 }

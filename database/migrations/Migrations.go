@@ -17,5 +17,6 @@ func Migrations() {
 		productMigrations(&db)
 		userMigrations(&db)
 		rackMigrations(&db)
+		transactionMigrations(&db)
 	}
 }
