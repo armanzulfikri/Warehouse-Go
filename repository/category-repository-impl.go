@@ -8,18 +8,18 @@ import (
 	"gorm.io/gorm"
 )
 
-//NewProductRepository ...
-func NewProductRepository(database *gorm.DB) ProductRepository {
-	return &productRepositoryImpl{
+//NewCategoryRepository ...
+func NewCategoryRepository(database *gorm.DB) CategoryRepository {
+	return &categoryRepositoryImpl{
 		Database: database,
 	}
 }
 
-type productRepositoryImpl struct {
+type categoryRepositoryImpl struct {
 	Database *gorm.DB
 }
 
-func (repository productRepositoryImpl) Insert(request *entity.Products) (response entity.Products) {
+func (repository categoryRepositoryImpl) Insert(request *entity.Categories) (response entity.Categories) {
 	err := repository.Database.Create(&request).Scan(&response)
 
 	if err.RowsAffected > 0 {
@@ -28,12 +28,12 @@ func (repository productRepositoryImpl) Insert(request *entity.Products) (respon
 		fmt.Println("error ", err.Error)
 	}
 
-	return entity.Products{}
+	return entity.Categories{}
 }
 
-func (repository productRepositoryImpl) GetAll() (response []response.ProductResponse) {
-	result := repository.Database.Model(&entity.Products{}).
-		Select("products.*").
+func (repository categoryRepositoryImpl) GetAll() (response []response.CategoryResponse) {
+	result := repository.Database.Model(&entity.Categories{}).
+		Select("categories.*").
 		Scan(&response)
 
 	if result.RowsAffected > 0 {
@@ -45,7 +45,7 @@ func (repository productRepositoryImpl) GetAll() (response []response.ProductRes
 	return
 }
 
-func (repository productRepositoryImpl) GetById(id interface{}) (response entity.Products) {
+func (repository categoryRepositoryImpl) GetById(id interface{}) (response entity.Categories) {
 	result := repository.Database.First(&response, id)
 
 	if result.RowsAffected > 0 {
@@ -57,7 +57,7 @@ func (repository productRepositoryImpl) GetById(id interface{}) (response entity
 	return
 }
 
-func (repository productRepositoryImpl) Update(request *entity.Products) (response entity.Products) {
+func (repository categoryRepositoryImpl) Update(request *entity.Categories) (response entity.Categories) {
 	result := repository.Database.Save(&request).Scan(&response)
 	if result.RowsAffected > 0 {
 		return
@@ -68,11 +68,11 @@ func (repository productRepositoryImpl) Update(request *entity.Products) (respon
 	return
 }
 
-func (repository productRepositoryImpl) DeleteById(id interface{}) {
-	result := repository.Database.Delete(&entity.Products{}, id)
+func (repository categoryRepositoryImpl) DeleteById(id interface{}) {
+	result := repository.Database.Delete(&entity.Categories{}, id)
 
 	if result.RowsAffected > 0 {
-		fmt.Println("Product Deleted")
+		fmt.Println("Category Deleted")
 	}
 
 	fmt.Println("Fail deleted data ", result.Error)

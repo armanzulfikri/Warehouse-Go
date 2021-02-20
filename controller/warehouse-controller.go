@@ -9,33 +9,33 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//ProductController ...
-type ProductController struct {
-	ProductService service.ProductService
+//WarehouseController ...
+type WarehouseController struct {
+	WarehouseService service.WarehouseService
 }
 
-//NewProductController ...
-func NewProductController(productService *service.ProductService) ProductController {
-	return ProductController{ProductService: *productService}
+//NewWarehouseController ...
+func NewWarehouseController(provinceService *service.WarehouseService) WarehouseController {
+	return WarehouseController{WarehouseService: *provinceService}
 }
 
 //Route ...
-func (controller *ProductController) Route(group *gin.RouterGroup) {
-	group.GET("/api/product", controller.List)
-	group.GET("/api/product/:id", controller.GetOne)
-	group.POST("/api/product", controller.Create)
-	group.PUT("/api/product/:id", controller.Update)
-	group.DELETE("/api/product/:id", controller.Delete)
+func (controller *WarehouseController) Route(group *gin.RouterGroup) {
+	group.GET("/api/warehouse", controller.List)
+	group.GET("/api/warehouse/:id", controller.GetOne)
+	group.POST("/api/warehouse", controller.Create)
+	group.PUT("/api/warehouse/:id", controller.Update)
+	group.DELETE("/api/warehouse/:id", controller.Delete)
 }
 
 //Create ...
-func (controller *ProductController) Create(context *gin.Context) {
-	var request request.CreateProductRequest
+func (controller *WarehouseController) Create(context *gin.Context) {
+	var request request.CreateWarehouseRequest
 	context.Bind(&request)
 
-	resp := controller.ProductService.Create(request)
+	resp := controller.WarehouseService.Create(request)
 
-	if resp.ProductName == "" {
+	if resp.WarehousesName == "" {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   http.StatusBadRequest,
@@ -53,10 +53,10 @@ func (controller *ProductController) Create(context *gin.Context) {
 }
 
 //GetOne ...
-func (controller *ProductController) GetOne(context *gin.Context) {
-	resp := controller.ProductService.GetById(context.Param("id"))
+func (controller *WarehouseController) GetOne(context *gin.Context) {
+	resp := controller.WarehouseService.GetById(context.Param("id"))
 
-	if resp.ProductName == "" {
+	if resp.WarehousesName == "" {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   http.StatusBadRequest,
@@ -74,14 +74,14 @@ func (controller *ProductController) GetOne(context *gin.Context) {
 }
 
 //Update ...
-func (controller *ProductController) Update(context *gin.Context) {
-	var request request.CreateProductRequest
+func (controller *WarehouseController) Update(context *gin.Context) {
+	var request request.CreateWarehouseRequest
 
 	context.Bind(&request)
 
-	resp := controller.ProductService.Update(context.Param("id"), request)
+	resp := controller.WarehouseService.Update(context.Param("id"), request)
 
-	if resp.ProductName == "" {
+	if resp.WarehousesName == "" {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   401,
@@ -99,8 +99,8 @@ func (controller *ProductController) Update(context *gin.Context) {
 }
 
 //List ...
-func (controller *ProductController) List(context *gin.Context) {
-	resp := controller.ProductService.List()
+func (controller *WarehouseController) List(context *gin.Context) {
+	resp := controller.WarehouseService.List()
 
 	if len(resp) > 0 {
 		context.JSON(http.StatusOK,
@@ -120,9 +120,9 @@ func (controller *ProductController) List(context *gin.Context) {
 }
 
 //Delete ...
-func (controller *ProductController) Delete(context *gin.Context) {
+func (controller *WarehouseController) Delete(context *gin.Context) {
 
-	controller.ProductService.DeleteById(context.Param("id"))
+	controller.WarehouseService.DeleteById(context.Param("id"))
 
 	context.JSON(http.StatusOK,
 		model.WebResponse{

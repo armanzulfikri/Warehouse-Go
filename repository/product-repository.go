@@ -1,12 +1,15 @@
 package repository
 
-import "warehouse/entity"
+import (
+	"warehouse/entity"
+	"warehouse/model/response"
+)
 
 //ProductRepository ...
 type ProductRepository interface {
-	Insert(request entity.Product) (product entity.Product)
-	GetAll() (products []entity.Product)
-	GetById(id int) (product entity.Product)
-	Update(request entity.Product) (product entity.Product)
-	DeleteById(id int)
+	Insert(request *entity.Products) (response entity.Products)
+	GetAll() (product []response.ProductResponse)
+	GetById(id interface{}) (response entity.Products)
+	Update(request *entity.Products) (response entity.Products)
+	DeleteById(id interface{})
 }

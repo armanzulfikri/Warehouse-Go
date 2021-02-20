@@ -2,9 +2,10 @@ package repository
 
 import (
 	"fmt"
-	"gorm.io/gorm"
 	"warehouse/entity"
 	"warehouse/model/response"
+
+	"gorm.io/gorm"
 )
 
 //NewUserRepository ...

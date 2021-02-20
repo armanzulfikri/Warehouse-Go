@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"warehouse/entity"
 	"warehouse/model/request"
 	"warehouse/model/response"
@@ -18,26 +19,86 @@ type productServiceImpl struct {
 	Repository repository.ProductRepository
 }
 
-//Create ...
-func (service productServiceImpl) Create(request request.CreateProduct) (resp response.CreateProduct) {
-	//Tambah Validasi disini
+//List
+func (service productServiceImpl) List() (responses []response.ProductResponse) {
+	responses = service.Repository.GetAll()
 
-	product := entity.Product{
-		Id:   request.ID,
-		Name: request.Name,
+	if len(responses) > 0 {
+		fmt.Println(len(responses))
+	} else {
+		fmt.Println("FAILED")
 	}
 
-	service.Repository.Insert(product)
-
-	resp = response.CreateProduct{
-		ID:   product.Id,
-		Name: product.Name,
-	}
-
-	return resp
+	return responses
 }
 
-//List ...
-func (service productServiceImpl) List() (responses []response.GetProduct) {
-	return responses
+//Create
+func (service productServiceImpl) Create(request request.CreateProductRequest) (response response.ProductResponse) {
+	product := entity.Products{
+		UserID:          request.UserID,
+		CategoryID:      request.CategoryID,
+		SupplierID:      request.SupplierID,
+		ProductName:     request.ProductName,
+		ProductImageURL: request.ProductImageURL,
+	}
+
+	result := service.Repository.Insert(&product)
+
+	if result.ProductName != "" {
+		response.ID = result.ID
+		response.UserID = result.UserID
+		response.CategoryID = result.CategoryID
+		response.SupplierID = result.SupplierID
+		response.ProductName = result.ProductName
+		response.ProductImageURL = result.ProductImageURL
+	}
+
+	return
+}
+
+//Update
+func (service productServiceImpl) Update(id interface{}, request request.CreateProductRequest) (response response.ProductResponse) {
+	product := service.Repository.GetById(id)
+
+	product.UserID = request.UserID
+	product.CategoryID = request.CategoryID
+	product.SupplierID = request.SupplierID
+	product.ProductName = request.ProductName
+	product.ProductImageURL = request.ProductImageURL
+
+	service.Repository.Update(&product)
+
+	if product.ProductName != "" {
+		response.ID = product.ID
+		response.UserID = product.UserID
+		response.CategoryID = product.CategoryID
+		response.SupplierID = product.SupplierID
+		response.ProductName = product.ProductName
+		response.ProductImageURL = product.ProductImageURL
+
+	}
+
+	return
+}
+
+//GetById
+func (service productServiceImpl) GetById(id interface{}) (response response.ProductResponse) {
+	result := service.Repository.GetById(id)
+
+	if result.ProductName != "" {
+		response.ID = result.ID
+		response.UserID = result.UserID
+		response.CategoryID = result.CategoryID
+		response.SupplierID = result.SupplierID
+		response.ProductName = result.ProductName
+		response.ProductImageURL = result.ProductImageURL
+
+	}
+
+	return
+}
+
+//DeleteById
+func (service productServiceImpl) DeleteById(id interface{}) {
+	service.Repository.DeleteById(id)
 }

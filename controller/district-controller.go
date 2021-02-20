@@ -9,33 +9,33 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//ProductController ...
-type ProductController struct {
-	ProductService service.ProductService
+//DistrictController ...
+type DistrictController struct {
+	DistrictService service.DistrictService
 }
 
-//NewProductController ...
-func NewProductController(productService *service.ProductService) ProductController {
-	return ProductController{ProductService: *productService}
+//NewDistrictController ...
+func NewDistrictController(districtService *service.DistrictService) DistrictController {
+	return DistrictController{DistrictService: *districtService}
 }
 
 //Route ...
-func (controller *ProductController) Route(group *gin.RouterGroup) {
-	group.GET("/api/product", controller.List)
-	group.GET("/api/product/:id", controller.GetOne)
-	group.POST("/api/product", controller.Create)
-	group.PUT("/api/product/:id", controller.Update)
-	group.DELETE("/api/product/:id", controller.Delete)
+func (controller *DistrictController) Route(group *gin.RouterGroup) {
+	group.GET("/api/district", controller.List)
+	group.GET("/api/district/:id", controller.GetOne)
+	group.POST("/api/district", controller.Create)
+	group.PUT("/api/district/:id", controller.Update)
+	group.DELETE("/api/district/:id", controller.Delete)
 }
 
 //Create ...
-func (controller *ProductController) Create(context *gin.Context) {
-	var request request.CreateProductRequest
+func (controller *DistrictController) Create(context *gin.Context) {
+	var request request.CreateDistrictRequest
 	context.Bind(&request)
 
-	resp := controller.ProductService.Create(request)
+	resp := controller.DistrictService.Create(request)
 
-	if resp.ProductName == "" {
+	if resp.Name == "" {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   http.StatusBadRequest,
@@ -53,10 +53,10 @@ func (controller *ProductController) Create(context *gin.Context) {
 }
 
 //GetOne ...
-func (controller *ProductController) GetOne(context *gin.Context) {
-	resp := controller.ProductService.GetById(context.Param("id"))
+func (controller *DistrictController) GetOne(context *gin.Context) {
+	resp := controller.DistrictService.GetById(context.Param("id"))
 
-	if resp.ProductName == "" {
+	if resp.Name == "" {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   http.StatusBadRequest,
@@ -74,14 +74,14 @@ func (controller *ProductController) GetOne(context *gin.Context) {
 }
 
 //Update ...
-func (controller *ProductController) Update(context *gin.Context) {
-	var request request.CreateProductRequest
+func (controller *DistrictController) Update(context *gin.Context) {
+	var request request.CreateDistrictRequest
 
 	context.Bind(&request)
 
-	resp := controller.ProductService.Update(context.Param("id"), request)
+	resp := controller.DistrictService.Update(context.Param("id"), request)
 
-	if resp.ProductName == "" {
+	if resp.Name == "" {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   401,
@@ -99,8 +99,8 @@ func (controller *ProductController) Update(context *gin.Context) {
 }
 
 //List ...
-func (controller *ProductController) List(context *gin.Context) {
-	resp := controller.ProductService.List()
+func (controller *DistrictController) List(context *gin.Context) {
+	resp := controller.DistrictService.List()
 
 	if len(resp) > 0 {
 		context.JSON(http.StatusOK,
@@ -120,9 +120,9 @@ func (controller *ProductController) List(context *gin.Context) {
 }
 
 //Delete ...
-func (controller *ProductController) Delete(context *gin.Context) {
+func (controller *DistrictController) Delete(context *gin.Context) {
 
-	controller.ProductService.DeleteById(context.Param("id"))
+	controller.DistrictService.DeleteById(context.Param("id"))
 
 	context.JSON(http.StatusOK,
 		model.WebResponse{
