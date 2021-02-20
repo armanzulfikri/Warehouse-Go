@@ -4,7 +4,7 @@ import "time"
 
 //SupplierResponse ...
 type SupplierResponse struct {
-	ID           uint
+	ID           uint      `json:"id"`
 	SupplierName string    `json:"supplier_name"`
 	Address      string    `json:"address"`
 	Telepon      string    `json:"telepon"`

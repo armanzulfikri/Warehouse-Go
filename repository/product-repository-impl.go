@@ -33,7 +33,7 @@ func (repository productRepositoryImpl) Insert(request *entity.Products) (respon
 
 func (repository productRepositoryImpl) GetAll() (response []response.ProductGetAllResponse) {
 	result := repository.Database.Model(&entity.Products{}).
-		Select("products.id, users.full_name as user_name,categories.category_name,suppliers.supplier_name,products.product_name,products.description,products.created_at").
+		Select("products.id, users.full_name as input_by, categories.category_name,suppliers.supplier_name,products.product_name, products.product_image_url,products.description,products.created_at").
 		Joins("join users on products.user_id = users.id").
 		Joins("join categories on products.category_id = categories.id").
 		Joins("join suppliers on products.supplier_id = suppliers.id").
