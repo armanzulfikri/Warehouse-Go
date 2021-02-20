@@ -17,5 +17,6 @@ func Seeder() {
 		SeedUser(&db)
 		SeedSupplier(&db)
 		SeedProduct(&db)
+		SeedTransaction(&db)
 	}
 }
