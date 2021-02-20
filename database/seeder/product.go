@@ -10,12 +10,12 @@ import (
 
 // SeedProduct func
 func SeedProduct(db *gorm.DB) {
-	var productArray = [...][5]string{
-		{"1", "4", "2", "Indomie Goreng", "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"},
-		{"1", "5", "1", "Biskuat", "https://images.unsplash.com/photo-1608769240116-a45a6ac33a55?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1842&q=80"},
-		{"1", "3", "3", "Energen", "https://images.unsplash.com/photo-1559598467-f8b76c8155d0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80"},
-		{"1", "4", "4", "Mie Sedaap", "https://images.unsplash.com/photo-1594100889583-a421e2b8265c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"},
-		{"1", "4", "5", "Gudang Garam Filter", "https://images.unsplash.com/photo-1527099908998-5b73a5fe2a0d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1355&q=80"},
+	var productArray = [...][6]string{
+		{"1", "4", "2", "Indomie Goreng", "Mie Goreng Merakyat", "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"},
+		{"1", "5", "1", "Biskuat", "Biskuat bisa bikin jadi macan", "https://images.unsplash.com/photo-1608769240116-a45a6ac33a55?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1842&q=80"},
+		{"1", "3", "3", "Energen", "Energen Minum makanan bergizi", "https://images.unsplash.com/photo-1559598467-f8b76c8155d0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80"},
+		{"1", "4", "4", "Mie Sedaap", "mie sedaap sekali", "https://images.unsplash.com/photo-1594100889583-a421e2b8265c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"},
+		{"1", "4", "5", "Gudang Garam Filter", "Asap tentram", "https://images.unsplash.com/photo-1527099908998-5b73a5fe2a0d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1355&q=80"},
 	}
 
 	var product entity.Products
@@ -28,7 +28,8 @@ func SeedProduct(db *gorm.DB) {
 		product.CategoryID = uint(category)
 		product.SupplierID = uint(supplier)
 		product.ProductName = v[3]
-		product.ProductImageURL = v[4]
+		product.Description = v[4]
+		product.ProductImageURL = v[5]
 
 		product.ID = 0
 
