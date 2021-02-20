@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//Route
+//Route func
 func Route(router *gin.Engine) *gin.Engine {
 	database := *config.GetConnection()
 
@@ -24,6 +24,8 @@ func Route(router *gin.Engine) *gin.Engine {
 	districtRepository := repository.NewDistrictRepository(&database)
 	categoryRepository := repository.NewCategoryRepository(&database)
 	warehouseRepository := repository.NewWarehouseRepository(&database)
+	supplierRepository := repository.NewSupplierRepository(&database)
+	rackRepository := repository.NewRackRepository(&database)
 
 	// Setup Service
 	productService := service.NewProductService(&productRepository)
@@ -33,6 +35,9 @@ func Route(router *gin.Engine) *gin.Engine {
 	districtService := service.NewDistrictService(&districtRepository)
 	categoryService := service.NewCategoryService(&categoryRepository)
 	warehouseService := service.NewWarehouseService(&warehouseRepository)
+	supplierService := service.NewSupplierService(&supplierRepository)
+	rackService := service.NewRackService(&rackRepository)
+
 	// Setup Controller
 	productController := controller.NewProductController(&productService)
 	authController := controller.NewAuthController(&authService)
@@ -41,6 +46,9 @@ func Route(router *gin.Engine) *gin.Engine {
 	districtController := controller.NewDistrictController(&districtService)
 	categoryController := controller.NewCategoryController(&categoryService)
 	warehouseController := controller.NewWarehouseController(&warehouseService)
+	supplierController := controller.NewSupplierController(&supplierService)
+	rackController := controller.NewRackController(&rackService)
+
 	// For Auth And Register
 	authController.Route(router)
 
@@ -54,6 +62,8 @@ func Route(router *gin.Engine) *gin.Engine {
 		districtController.Route(&group)
 		categoryController.Route(&group)
 		warehouseController.Route(&group)
+		supplierController.Route(&group)
+		rackController.Route(&group)
 
 	}
 

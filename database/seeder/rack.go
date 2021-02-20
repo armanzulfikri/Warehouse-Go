@@ -30,7 +30,7 @@ func SeedRack(db *gorm.DB) {
 		category, _ := strconv.Atoi(v[1])
 		capacity, _ := strconv.Atoi(v[3])
 
-		racks.WarehousesID = uint(warehouse)
+		racks.WarehouseID = uint(warehouse)
 		racks.CategoryID = uint(category)
 		racks.RackCode = v[2]
 		racks.RackCapacity = int(capacity)

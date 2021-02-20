@@ -12,8 +12,8 @@ type Racks struct {
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 	DeletedAt    gorm.DeletedAt `gorm:"index"`
-	WarehousesID uint
-	CategoryID   uint
-	RackCode     string `json:"rack_code"`
-	RackCapacity int    `json:"rack_capacity"`
+	WarehouseID  uint           `json:"warehouse_id"`
+	CategoryID   uint           `json:"category_id"`
+	RackCode     string         `json:"rack_code"`
+	RackCapacity int            `json:"rack_capacity"`
 }

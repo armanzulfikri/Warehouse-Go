@@ -7,7 +7,7 @@ import (
 
 //ProductService ...
 type ProductService interface {
-	List() (responses []response.ProductResponse)
+	List() (responses []response.ProductGetAllResponse)
 	Create(request request.CreateProductRequest) (response response.ProductResponse)
 	Update(id interface{}, request request.CreateProductRequest) (response response.ProductResponse)
 	GetById(id interface{}) (response response.ProductResponse)

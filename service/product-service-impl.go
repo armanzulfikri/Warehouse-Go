@@ -20,7 +20,7 @@ type productServiceImpl struct {
 }
 
 //List
-func (service productServiceImpl) List() (responses []response.ProductResponse) {
+func (service productServiceImpl) List() (responses []response.ProductGetAllResponse) {
 	responses = service.Repository.GetAll()
 
 	if len(responses) > 0 {

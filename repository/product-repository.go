@@ -8,7 +8,7 @@ import (
 //ProductRepository ...
 type ProductRepository interface {
 	Insert(request *entity.Products) (response entity.Products)
-	GetAll() (product []response.ProductResponse)
+	GetAll() (product []response.ProductGetAllResponse)
 	GetById(id interface{}) (response entity.Products)
 	Update(request *entity.Products) (response entity.Products)
 	DeleteById(id interface{})
