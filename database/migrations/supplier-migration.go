@@ -11,7 +11,7 @@ import (
 func supplierMigrations(db *gorm.DB) {
 	var checkTableSuppliers bool
 
-	db.Migrator().DropTable(&entity.Racks{})
+	db.Migrator().DropTable(&entity.Suppliers{})
 
 	checkTableSuppliers = db.Migrator().HasTable(&entity.Suppliers{})
 	if !checkTableSuppliers {
