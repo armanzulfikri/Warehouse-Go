@@ -18,5 +18,6 @@ func Migrations() {
 		userMigrations(&db)
 		rackMigrations(&db)
 		transactionMigrations(&db)
+		transactionDetailMigrations(&db)
 	}
 }
