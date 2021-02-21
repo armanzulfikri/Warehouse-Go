@@ -72,7 +72,7 @@ func Route(router *gin.Engine) *gin.Engine {
 	corsConfig.AllowMethods = []string{"PUT", "PATCH", "GET", "POST", "DELETE"}
 	corsConfig.MaxAge = 100 * time.Hour
 
-	router.Use(cors.Default())
+	router.Use(cors.New(corsConfig))
 	// For Auth And Register
 	authController.Route(router)
 
