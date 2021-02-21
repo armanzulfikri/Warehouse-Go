@@ -27,6 +27,7 @@ func Route(router *gin.Engine) *gin.Engine {
 	supplierRepository := repository.NewSupplierRepository(&database)
 	rackRepository := repository.NewRackRepository(&database)
 	transactionRepository := repository.NewTransactionRepository(&database)
+	transactionDetailRepo := repository.NewTransactionDetailRepository(&database)
 
 	// Setup Service
 	productService := service.NewProductService(&productRepository)
@@ -39,6 +40,7 @@ func Route(router *gin.Engine) *gin.Engine {
 	supplierService := service.NewSupplierService(&supplierRepository)
 	rackService := service.NewRackService(&rackRepository)
 	transactionService := service.NewTransactionService(&transactionRepository)
+	transactionDetailService := service.NewTransactionDetailService(&transactionDetailRepo)
 
 	// Setup Controller
 	productController := controller.NewProductController(&productService)
@@ -51,6 +53,7 @@ func Route(router *gin.Engine) *gin.Engine {
 	supplierController := controller.NewSupplierController(&supplierService)
 	rackController := controller.NewRackController(&rackService)
 	transactionController := controller.NewTransactionController(&transactionService)
+	transactionDetailController := controller.NewTransactionDetailController(&transactionDetailService)
 
 	// For Auth And Register
 	authController.Route(router)
@@ -68,6 +71,7 @@ func Route(router *gin.Engine) *gin.Engine {
 		supplierController.Route(&group)
 		rackController.Route(&group)
 		transactionController.Route(&group)
+		transactionDetailController.Route(&group)
 	}
 
 	return router
