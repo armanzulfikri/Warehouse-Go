@@ -24,5 +24,5 @@ func main() {
 	migrations.Migrations()
 	seeder.Seeder()
 	router := web.Route(gin.Default())
-	router.Run(":8000")
+	router.Run(":8080")
 }
