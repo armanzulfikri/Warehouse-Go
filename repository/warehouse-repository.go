@@ -9,6 +9,7 @@ import (
 type WarehouseRepository interface {
 	Insert(request *entity.Warehouses) (response entity.Warehouses)
 	GetAll() (warehouse []response.WarehousesGetAllResponse)
+	GetByProvince(provinceID interface{}) (warehouse []response.WarehousesGetAllResponse)
 	GetById(id interface{}) (response entity.Warehouses)
 	Update(request *entity.Warehouses) (response entity.Warehouses)
 	DeleteById(id interface{})

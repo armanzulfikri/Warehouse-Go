@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"warehouse/model"
 	"warehouse/model/request"
+	"warehouse/model/response"
 	"warehouse/service"
 
 	"github.com/gin-gonic/gin"
@@ -22,6 +23,7 @@ func NewWarehouseController(provinceService *service.WarehouseService) Warehouse
 //Route ...
 func (controller *WarehouseController) Route(group *gin.RouterGroup) {
 	group.GET("/api/warehouse", controller.List)
+	// group.GET("/api/warehouse/:province_id", controller.ListByProvince)
 	group.GET("/api/warehouse/:id", controller.GetOne)
 	group.POST("/api/warehouse", controller.Create)
 	group.PUT("/api/warehouse/:id", controller.Update)
@@ -100,7 +102,14 @@ func (controller *WarehouseController) Update(context *gin.Context) {
 
 //List ...
 func (controller *WarehouseController) List(context *gin.Context) {
-	resp := controller.WarehouseService.List()
+	var resp []response.WarehousesGetAllResponse
+	provID := context.Query("province_id")
+	if provID == "" {
+		resp = controller.WarehouseService.List()
+	}
+	if provID != "" {
+		resp = controller.WarehouseService.ListByProvince(provID)
+	}
 
 	if len(resp) > 0 {
 		context.JSON(http.StatusOK,
@@ -118,6 +127,27 @@ func (controller *WarehouseController) List(context *gin.Context) {
 			})
 	}
 }
+
+//ListByProvince ...
+// func (controller *WarehouseController) ListByProvince(context *gin.Context) {
+// 	resp := controller.WarehouseService.ListByProvince(context.Param(":province_id"))
+
+// 	if len(resp) > 0 {
+// 		context.JSON(http.StatusOK,
+// 			model.WebResponse{
+// 				Code:   http.StatusOK,
+// 				Status: "OK",
+// 				Data:   resp,
+// 			})
+// 	} else {
+// 		context.JSON(http.StatusOK,
+// 			model.WebResponse{
+// 				Code:   http.StatusOK,
+// 				Status: "OK",
+// 				Data:   nil,
+// 			})
+// 	}
+// }
 
 //Delete ...
 func (controller *WarehouseController) Delete(context *gin.Context) {

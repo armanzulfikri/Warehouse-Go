@@ -32,6 +32,19 @@ func (service warehouseServiceImpl) List() (responses []response.WarehousesGetAl
 	return responses
 }
 
+//List
+func (service warehouseServiceImpl) ListByProvince(provinceID interface{}) (responses []response.WarehousesGetAllResponse) {
+	responses = service.Repository.GetByProvince(provinceID)
+
+	if len(responses) > 0 {
+		fmt.Println(len(responses))
+	} else {
+		fmt.Println("FAILED")
+	}
+
+	return responses
+}
+
 //Create
 func (service warehouseServiceImpl) Create(request request.CreateWarehouseRequest) (response response.WarehouseResponse) {
 	warehouse := entity.Warehouses{
