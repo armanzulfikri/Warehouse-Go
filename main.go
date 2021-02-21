@@ -28,7 +28,7 @@ func main() {
 	seeder.Seeder()
 	router := web.Route(gin.Default())
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000", "http://10.75.101.19:3000"},
+		AllowOrigins:     []string{"http://localhost:3000", "http://36.66.177.18:3000", "http://36.66.177.18"},
 		AllowMethods:     []string{"PUT", "PATCH", "GET", "POST", "DELETE"},
 		AllowHeaders:     []string{"Origin"},
 		ExposeHeaders:    []string{"Content-Length"},
