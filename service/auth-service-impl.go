@@ -64,7 +64,7 @@ func (service authServiceImpl) Register(request request.RegisterRequest) (respon
 		Gender:     request.Gender,
 		BirthDate:  request.BirthDate,
 		BirthPlace: request.BirthPlace,
-		Email:      request.FullName,
+		Email:      request.Email,
 		Password:   string(hash),
 		Role:       request.Role,
 	}
@@ -78,7 +78,7 @@ func (service authServiceImpl) Register(request request.RegisterRequest) (respon
 		response.Gender = result.Gender
 		response.BirthDate = result.BirthDate
 		response.BirthPlace = result.BirthPlace
-		response.Email = result.FullName
+		response.Email = result.Email
 		response.Role = result.Role
 	}
 
