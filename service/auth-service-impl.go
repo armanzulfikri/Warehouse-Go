@@ -28,8 +28,6 @@ func (service authServiceImpl) Login(request request.LoginRequest) (response res
 
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(request.Password)); err != nil {
 		log.Println("Email ", user.Email, " Password salah")
-		response.Code = 401
-		response.Status = "email atau password salah"
 		response.Token = ""
 	} else {
 		type authCustomClaims struct {
@@ -50,12 +48,8 @@ func (service authServiceImpl) Login(request request.LoginRequest) (response res
 		sign := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), claims)
 		token, err := sign.SignedString([]byte(os.Getenv("SECRET_TOKEN")))
 		if err != nil {
-			response.Code = 401
-			response.Status = "Gagal create token, message" + err.Error()
 			response.Token = ""
 		} else {
-			response.Code = 401
-			response.Status = "Login Succcess"
 			response.Token = token
 		}
 	}
