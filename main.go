@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"warehouse/config"
 	"warehouse/database/migrations"
 	"warehouse/database/seeder"
@@ -24,5 +25,5 @@ func main() {
 	migrations.Migrations()
 	seeder.Seeder()
 	router := web.Route(gin.Default())
-	router.Run(":8080")
+	router.Run(":" + os.Getenv("PORT"))
 }
