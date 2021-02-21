@@ -9,8 +9,8 @@ import (
 func Seeder() {
 	db := *config.GetConnection()
 	if os.Getenv("USE_SEEDER") == "yes" {
-		// SeedProvince(&db)
-		// SeedDisctrict(&db)
+		SeedProvince(&db)
+		SeedDisctrict(&db)
 		SeedWareHouse(&db)
 		SeedRack(&db)
 		SeedCategory(&db)
