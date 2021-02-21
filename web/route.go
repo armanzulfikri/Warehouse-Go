@@ -1,6 +1,7 @@
 package web
 
 import (
+	"time"
 	"warehouse/config"
 	"warehouse/controller"
 	"warehouse/repository"
@@ -58,6 +59,18 @@ func Route(router *gin.Engine) *gin.Engine {
 	transactionController := controller.NewTransactionController(&transactionService)
 	transactionDetailController := controller.NewTransactionDetailController(&transactionDetailService)
 	statController := controller.NewStatisticController(&statService)
+
+	// AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"},
+	// 	AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type"},
+	// 	AllowCredentials: false,
+	// 	MaxAge:           12 * time.Hour,
+
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true
+	corsConfig.AllowCredentials = true
+	corsConfig.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type"}
+	corsConfig.AllowMethods = []string{"PUT", "PATCH", "GET", "POST", "DELETE"}
+	corsConfig.MaxAge = 100 * time.Hour
 
 	router.Use(cors.Default())
 	// For Auth And Register
