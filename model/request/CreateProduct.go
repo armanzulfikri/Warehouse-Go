@@ -7,4 +7,5 @@ type CreateProductRequest struct {
 	SupplierID      uint   `json:"supplier_id"`
 	ProductName     string `json:"product_name"`
 	ProductImageURL string `json:"product_image"`
+	Description     string `json:"description"`
 }
