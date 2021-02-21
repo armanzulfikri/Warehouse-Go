@@ -6,6 +6,7 @@ import (
 	"warehouse/repository"
 	"warehouse/service"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -58,6 +59,7 @@ func Route(router *gin.Engine) *gin.Engine {
 	transactionDetailController := controller.NewTransactionDetailController(&transactionDetailService)
 	statController := controller.NewStatisticController(&statService)
 
+	router.Use(cors.Default())
 	// For Auth And Register
 	authController.Route(router)
 
