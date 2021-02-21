@@ -1,1 +1,1 @@
-web: bin/warehouse
+web: bin/warehouse-go
