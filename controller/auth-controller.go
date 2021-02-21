@@ -60,7 +60,7 @@ func (controller *AuthController) Login(context *gin.Context) {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   401,
-				Status: resp.Status,
+				Status: "Login Failed",
 				Data:   nil,
 			})
 	} else {
