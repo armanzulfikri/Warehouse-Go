@@ -28,15 +28,12 @@ func main() {
 	seeder.Seeder()
 	router := web.Route(gin.Default())
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowOrigins:     []string{"http://localhost:3000", "http://10.75.101.19:3000"},
 		AllowMethods:     []string{"PUT", "PATCH", "GET", "POST", "DELETE"},
 		AllowHeaders:     []string{"Origin"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
-		AllowOriginFunc: func(origin string) bool {
-			return origin == "http://localhost:3000"
-		},
-		MaxAge: 500 * time.Hour,
+		MaxAge:           500 * time.Hour,
 	}))
 	router.Run(":" + os.Getenv("PORT"))
 }
