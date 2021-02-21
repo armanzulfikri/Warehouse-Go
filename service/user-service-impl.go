@@ -41,7 +41,7 @@ func (service userServiceImpl) Create(request request.RegisterRequest) (response
 		Gender:     request.Gender,
 		BirthDate:  request.BirthDate,
 		BirthPlace: request.BirthPlace,
-		Email:      request.FullName,
+		Email:      request.Email,
 		Password:   string(hash),
 		Role:       request.Role,
 	}
@@ -55,7 +55,7 @@ func (service userServiceImpl) Create(request request.RegisterRequest) (response
 		response.Gender = result.Gender
 		response.BirthDate = result.BirthDate
 		response.BirthPlace = result.BirthPlace
-		response.Email = result.FullName
+		response.Email = result.Email
 		response.Role = result.Role
 	}
 
@@ -71,7 +71,7 @@ func (service userServiceImpl) Update(id interface{}, request request.RegisterRe
 	user.Gender = request.Gender
 	user.BirthDate = request.BirthDate
 	user.BirthPlace = request.BirthPlace
-	user.Email = request.FullName
+	user.Email = request.Email
 	user.Password = string(hash)
 	user.Role = request.Role
 
@@ -84,7 +84,7 @@ func (service userServiceImpl) Update(id interface{}, request request.RegisterRe
 		response.Gender = user.Gender
 		response.BirthDate = user.BirthDate
 		response.BirthPlace = user.BirthPlace
-		response.Email = user.FullName
+		response.Email = user.Email
 		response.Role = user.Role
 	}
 

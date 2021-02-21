@@ -35,7 +35,7 @@ func (controller *AuthController) Register(context *gin.Context) {
 		context.JSON(http.StatusOK,
 			model.WebResponse{
 				Code:   http.StatusBadRequest,
-				Status: "Login Failed",
+				Status: "Register Failed",
 				Data:   nil,
 			})
 	} else {

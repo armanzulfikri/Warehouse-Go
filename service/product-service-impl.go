@@ -40,6 +40,7 @@ func (service productServiceImpl) Create(request request.CreateProductRequest) (
 		SupplierID:      request.SupplierID,
 		ProductName:     request.ProductName,
 		ProductImageURL: request.ProductImageURL,
+		Description:     request.Description,
 	}
 
 	result := service.Repository.Insert(&product)
@@ -51,6 +52,7 @@ func (service productServiceImpl) Create(request request.CreateProductRequest) (
 		response.SupplierID = result.SupplierID
 		response.ProductName = result.ProductName
 		response.ProductImageURL = result.ProductImageURL
+		response.Description = result.Description
 	}
 
 	return
