@@ -77,7 +77,17 @@ func (repository transactionDetailRepositoryImpl) GetAll() (response []response.
 }
 
 func (repository transactionDetailRepositoryImpl) Insert(request *entity.TransactionDetails) (response entity.TransactionDetails) {
+	var stock, currentStock int
 	err := repository.Database.Create(&request).Scan(&response)
+
+	repository.Database.Model(&entity.Transactions{}).Where("id = ?", request.TransactionID).Select("product_stock").Scan(&stock)
+
+	if request.DateOfType == "date_out" {
+		currentStock = stock - request.Quantity
+	} else {
+		currentStock = stock + request.Quantity
+	}
+	repository.Database.Model(&entity.Transactions{}).Where("id = ?", request.TransactionID).Update("product_stock", currentStock)
 
 	if err.RowsAffected > 0 {
 		return response
