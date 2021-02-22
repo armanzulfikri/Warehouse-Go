@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"time"
 	"warehouse/entity"
 	"warehouse/model/request"
 	"warehouse/model/response"
@@ -65,6 +66,7 @@ func (service transactionDetailServiceImpl) Create(request request.CreateDetailR
 		ProductCode:   request.ProductCode,
 		DateOfType:    request.DateOfType,
 		Quantity:      request.Quantity,
+		Date:          time.Now(),
 	}
 
 	result := service.Repository.Insert(&transaction)
@@ -75,6 +77,7 @@ func (service transactionDetailServiceImpl) Create(request request.CreateDetailR
 		response.ProductCode = result.ProductCode
 		response.DateOfType = result.DateOfType
 		response.Quantity = result.Quantity
+		response.Date = result.Date
 	}
 
 	return
