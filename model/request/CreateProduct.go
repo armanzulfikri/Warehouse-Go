@@ -6,6 +6,6 @@ type CreateProductRequest struct {
 	CategoryID      uint   `json:"category_id"`
 	SupplierID      uint   `json:"supplier_id"`
 	ProductName     string `json:"product_name"`
-	ProductImageURL string `json:"product_image"`
+	ProductImageURL string `json:"product_image_url"`
 	Description     string `json:"description"`
 }
