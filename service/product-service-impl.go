@@ -32,6 +32,19 @@ func (service productServiceImpl) List() (responses []response.ProductGetAllResp
 	return responses
 }
 
+//List
+func (service productServiceImpl) ListBySupplier(id interface{}) (responses []response.ProductGetAllResponse) {
+	responses = service.Repository.GetBySupplier(id)
+
+	if len(responses) > 0 {
+		fmt.Println(len(responses))
+	} else {
+		fmt.Println("FAILED")
+	}
+
+	return responses
+}
+
 //Create
 func (service productServiceImpl) Create(request request.CreateProductRequest) (response response.ProductResponse) {
 	product := entity.Products{

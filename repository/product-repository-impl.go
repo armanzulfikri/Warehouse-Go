@@ -48,6 +48,23 @@ func (repository productRepositoryImpl) GetAll() (response []response.ProductGet
 	return
 }
 
+func (repository productRepositoryImpl) GetBySupplier(id interface{}) (response []response.ProductGetAllResponse) {
+	result := repository.Database.Model(&entity.Products{}).Where("products.supplier_id = ?", id).
+		Select("products.id, users.full_name as input_by, categories.category_name,suppliers.supplier_name,products.product_name, products.product_image_url,products.description,products.created_at").
+		Joins("join users on products.user_id = users.id").
+		Joins("join categories on products.category_id = categories.id").
+		Joins("join suppliers on products.supplier_id = suppliers.id").
+		Scan(&response)
+
+	if result.RowsAffected > 0 {
+
+	} else {
+		fmt.Println("Errors ", result.Error)
+	}
+
+	return
+}
+
 func (repository productRepositoryImpl) GetById(id interface{}) (response entity.Products) {
 	result := repository.Database.First(&response, id)
 

@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"warehouse/model"
 	"warehouse/model/request"
+	"warehouse/model/response"
 	"warehouse/service"
 
 	"github.com/gin-gonic/gin"
@@ -100,7 +101,14 @@ func (controller *ProductController) Update(context *gin.Context) {
 
 //List ...
 func (controller *ProductController) List(context *gin.Context) {
-	resp := controller.ProductService.List()
+	var resp []response.ProductGetAllResponse
+	suppID := context.Query("supplier_id")
+	if suppID == "" {
+		resp = controller.ProductService.List()
+	}
+	if suppID != "" {
+		resp = controller.ProductService.ListBySupplier(suppID)
+	}
 
 	if len(resp) > 0 {
 		context.JSON(http.StatusOK,
