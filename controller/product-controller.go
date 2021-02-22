@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"log"
 	"net/http"
 	"warehouse/model"
 	"warehouse/model/request"
@@ -34,7 +35,13 @@ func (controller *ProductController) Create(context *gin.Context) {
 	var request request.CreateProductRequest
 	context.Bind(&request)
 
-	resp := controller.ProductService.Create(request)
+	strToken := context.Request.Header.Get("Authorization")
+	token, err := service.VerifyToken(strToken)
+	if err != nil {
+		log.Println("error --> ", err.Error())
+	}
+
+	resp := controller.ProductService.Create(request, token)
 
 	if resp.ProductName == "" {
 		context.JSON(http.StatusOK,

@@ -35,6 +35,7 @@ func (service authServiceImpl) Login(request request.LoginRequest) (response res
 			Email    string `json:"email"`
 			Role     string `json:"role"`
 			FullName string `json:"full_name"`
+			ID       uint   `json:"id"`
 			jwt.StandardClaims
 		}
 
@@ -42,6 +43,7 @@ func (service authServiceImpl) Login(request request.LoginRequest) (response res
 			user.Email,
 			user.Role,
 			user.FullName,
+			user.ID,
 			jwt.StandardClaims{
 				ExpiresAt: time.Now().Add(time.Hour * 10).Unix(),
 				IssuedAt:  time.Now().Unix(),

@@ -2,10 +2,13 @@ package service
 
 import (
 	"fmt"
+	"strconv"
 	"warehouse/entity"
 	"warehouse/model/request"
 	"warehouse/model/response"
 	"warehouse/repository"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 //NewProductService ...
@@ -46,9 +49,13 @@ func (service productServiceImpl) ListBySupplier(id interface{}) (responses []re
 }
 
 //Create
-func (service productServiceImpl) Create(request request.CreateProductRequest) (response response.ProductResponse) {
+func (service productServiceImpl) Create(request request.CreateProductRequest, payload jwt.MapClaims) (response response.ProductResponse) {
+	id := payload["id"]
+	strID := fmt.Sprintf("%v", id)
+	uintID, _ := strconv.ParseUint(strID, 10, 32)
+	fmt.Println(uintID)
 	product := entity.Products{
-		UserID:          request.UserID,
+		UserID:          uint(uintID),
 		CategoryID:      request.CategoryID,
 		SupplierID:      request.SupplierID,
 		ProductName:     request.ProductName,
