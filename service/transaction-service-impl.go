@@ -2,10 +2,13 @@ package service
 
 import (
 	"fmt"
+	"strconv"
 	"warehouse/entity"
 	"warehouse/model/request"
 	"warehouse/model/response"
 	"warehouse/repository"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 //NewTransactionService ...
@@ -33,8 +36,13 @@ func (service transactionServiceImpl) List(warehouseID interface{}) (responses [
 }
 
 //Create
-func (service transactionServiceImpl) Create(request request.CreateTransactionRequest) (response response.CreateTransactionResponse) {
+func (service transactionServiceImpl) Create(request request.CreateTransactionRequest, payload jwt.MapClaims) (response response.CreateTransactionResponse) {
+	id := payload["id"]
+	strID := fmt.Sprintf("%v", id)
+	uintID, _ := strconv.ParseUint(strID, 10, 32)
+	fmt.Println(uintID)
 	transaction := entity.Transactions{
+		UserID:       uint(uintID),
 		ProductID:    request.ProductID,
 		RackID:       request.RackID,
 		ProductStock: 0,
@@ -44,6 +52,7 @@ func (service transactionServiceImpl) Create(request request.CreateTransactionRe
 
 	if result.ProductID != 0 {
 		response.ID = result.ID
+		response.UserID = result.UserID
 		response.ProductID = result.ProductID
 		response.RackID = result.RackID
 		response.ProductStock = result.ProductStock

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"log"
 	"net/http"
 	"warehouse/model"
 	"warehouse/model/request"
@@ -32,7 +33,13 @@ func (controller *TransactionController) Create(context *gin.Context) {
 	var request request.CreateTransactionRequest
 	context.Bind(&request)
 
-	resp := controller.TransactionService.Create(request)
+	strToken := context.Request.Header.Get("Authorization")
+	token, err := service.VerifyToken(strToken)
+	if err != nil {
+		log.Println("error --> ", err.Error())
+	}
+
+	resp := controller.TransactionService.Create(request, token)
 
 	if resp.ID < 1 {
 		context.JSON(http.StatusOK,

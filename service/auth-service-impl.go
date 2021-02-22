@@ -1,8 +1,6 @@
 package service
 
 import (
-	"github.com/dgrijalva/jwt-go"
-	"golang.org/x/crypto/bcrypt"
 	"log"
 	"os"
 	"time"
@@ -10,6 +8,9 @@ import (
 	"warehouse/model/request"
 	"warehouse/model/response"
 	"warehouse/repository"
+
+	"github.com/dgrijalva/jwt-go"
+	"golang.org/x/crypto/bcrypt"
 )
 
 //NewAuthService ...
@@ -33,12 +34,14 @@ func (service authServiceImpl) Login(request request.LoginRequest) (response res
 		type authCustomClaims struct {
 			Email string `json:"email"`
 			Role  string `json:"role"`
+			ID    uint   `json:"id"`
 			jwt.StandardClaims
 		}
 
 		claims := &authCustomClaims{
 			user.Email,
 			user.Role,
+			user.ID,
 			jwt.StandardClaims{
 				ExpiresAt: time.Now().Add(time.Hour * 10).Unix(),
 				IssuedAt:  time.Now().Unix(),
