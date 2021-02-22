@@ -68,7 +68,7 @@ func Route(router *gin.Engine) *gin.Engine {
 	corsConfig := cors.DefaultConfig()
 	corsConfig.AllowAllOrigins = true
 	corsConfig.AllowCredentials = true
-	corsConfig.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Authorization"}
+	corsConfig.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Authorization", "Connection", "Accept-Encoding", "Accept", "User-Agent", "Host"}
 	corsConfig.AllowMethods = []string{"PUT", "PATCH", "GET", "POST", "DELETE"}
 	corsConfig.MaxAge = 100 * time.Hour
 
