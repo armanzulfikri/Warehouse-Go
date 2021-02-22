@@ -8,8 +8,8 @@ import (
 
 //WarehouseResponse ...
 type WarehouseResponse struct {
-	ID                 uint
-	DistrictsID        uint
+	ID                 uint   `json:"id"`
+	DistrictsID        uint   `json:"district_id"`
 	WarehousesName     string `json:"warehouses_name"`
 	WarehousesCapacity int    `json:"warehouses_capacity"`
 	WarehousesType     string `json:"warehouses_type"`

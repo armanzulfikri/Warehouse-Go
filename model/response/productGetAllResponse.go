@@ -6,7 +6,7 @@ import (
 
 //ProductGetAllResponse ...
 type ProductGetAllResponse struct {
-	ID              uint
+	ID              uint   `json:"id"`
 	InputBy         string `json:"input_by"`
 	CategoryName    string `json:"category_name"`
 	SupplierName    string `json:"supplier_name"`

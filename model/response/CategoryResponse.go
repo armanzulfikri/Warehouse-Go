@@ -4,7 +4,7 @@ import "time"
 
 //CategoryResponse ...
 type CategoryResponse struct {
-	ID           uint
+	ID           uint      `json:"id"`
 	CategoryName string    `json:"category_name"`
 	CreatedAt    time.Time `json:"created_at"`
 	UpdatedAt    time.Time `json:"updated_at"`
