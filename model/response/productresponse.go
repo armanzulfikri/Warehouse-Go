@@ -4,7 +4,7 @@ import "time"
 
 //ProductResponse ...
 type ProductResponse struct {
-	ID              uint
+	ID              uint      `json:"id"`
 	UserID          uint      `json:"user_id"`
 	CategoryID      uint      `json:"category_id"`
 	SupplierID      uint      `json:"supplier_id"`
